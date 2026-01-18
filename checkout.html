@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout | Epic Games</title>
+  <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="logo">EPIC GAMES</div>
+
+  <navbar class="nav-links">
+    <a href="index.html" class="link">STORE</a>
+    <a href="about.html" class="link">ABOUT</a>
+    <a href="checkout.html" class="link checkout-link">
+      🛒 CHECKOUT <span id="cartCount">0</span>
+    </a>
+  </navbar>
+</header>
+
+<section class="checkout-container" id="checkout"></section>
+
+<script>
+const game = JSON.parse(localStorage.getItem("buyGame"));
+const user = localStorage.getItem("epicUser") || "Guest";
+
+if (!game) {
+  document.getElementById("checkout").innerHTML = `
+    <h2 style="text-align:center;margin-top:60px;">
+      Your cart is empty 🛒
+    </h2>
+  `;
+} else {
+  const platform = "PC (Epic Games Launcher)";
+const license = "Standard Edition";
+const purchaseType = game.price === 0 ? "Free License" : "One-time Purchase";
+
+const tax = game.price === 0 ? 0 : Math.round(game.price * 0.18);
+const discount = game.price === 0 ? 0 : Math.round(game.price * 0.05); // 5% Epic bonus
+const total = game.price + tax - discount;
+
+  document.getElementById("checkout").innerHTML = `
+    <div class="checkout-box">
+      
+      <!-- LEFT -->
+      <div class="checkout-left">
+        <h2>Order Summary</h2>
+
+        <div class="game-row">
+          <img src="${game.img}" class="checkout-poster">
+          <div>
+            <h3>${game.name}</h3>
+            <p>${game.genre || "Premium Game"}</p>
+            <p class="price">
+              ${game.price === 0 ? "FREE" : "₹" + game.price}
+            </p>
+          </div>
+        </div>
+
+        <div class="summary">
+
+  <div><span>Game ID</span><span>${game.id || "EPIC-GAME"}</span></div>
+  <div><span>Developer</span><span>${game.developer || "Epic Games Partner"}</span></div>
+  <div><span>Release Date</span><span>${game.release || "—"}</span></div>
+  <div><span>Platform</span><span>${platform}</span></div>
+  <div><span>License</span><span>${license}</span></div>
+  <div><span>Purchase Type</span><span>${purchaseType}</span></div>
+
+  <div style="margin-top:15px"></div>
+
+  <div><span>Base Price</span><span>₹${game.price}</span></div>
+  <div><span>GST (18%)</span><span>₹${tax}</span></div>
+  <div><span>Epic Bonus</span><span>- ₹${discount}</span></div>
+
+  <div class="total">
+    <span>Total Payable</span>
+    <span>₹${total}</span>
+  </div>
+</div>
+
+
+      <!-- RIGHT -->
+      <div class="checkout-right">
+        <h2>Payment Details</h2>
+
+        <div class="payment-box">
+          <p><b>Account:</b> ${user}</p>
+          <p><b>Transaction ID:</b> EPIC-${Date.now()}</p>
+          <p><b>Payment Method:</b> UPI / Card</p>
+        </div>
+
+        <button onclick="completePayment()">Confirm & Pay ₹${total}</button>
+
+        <p class="secure">🔒 Secure Transaction</p>
+      </div>
+
+    </div>
+  `;
+}
+
+
+function completePayment() {
+  const game = JSON.parse(localStorage.getItem("buyGame"));
+
+  document.getElementById("successPoster").src = game.img;
+  document.getElementById("successGame").innerText =
+    `${game.name} has been added to your library`;
+
+  document.getElementById("successTxn").innerText =
+    "EPIC-" + Date.now();
+
+  document.getElementById("successOverlay").classList.add("show");
+
+  localStorage.removeItem("buyGame");
+
+  setTimeout(() => {
+    location.href = "index.html";
+  }, 4000);
+}
+
+</script>
+<!-- TRANSACTION SUCCESS -->
+<div id="successOverlay" class="success-overlay">
+  <div class="success-box">
+    <img id="successPoster" />
+    <h1>Payment Successful 🎉</h1>
+    <p id="successGame"></p>
+
+    <div class="success-info">
+      <span>Transaction ID</span>
+      <b id="successTxn"></b>
+    </div>
+
+    <p class="redirect-text">Redirecting to store...</p>
+  </div>
+</div>
+
+</body>
+</html>

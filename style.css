@@ -1,0 +1,475 @@
+/* =======================
+   GLOBAL RESET
+======================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #26292e;
+  color: rgb(125, 138, 183);
+  font-family: Arial, sans-serif;
+}
+
+/* =======================
+   NAVBAR
+======================= */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: #020617;
+  border-bottom: 1px solid #1e293b;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+navbar {
+  display: flex;
+  gap: 20px;
+}
+.checkout-link {
+  position: relative;
+}
+
+#cartCount {
+  background: #11a3e1;
+  color: #020617;
+  font-size: 12px;
+  padding: 2px 7px;
+  border-radius: 20px;
+  margin-left: 6px;
+  font-weight: bold;
+}
+
+
+.link {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.link:hover {
+  color: white;
+}
+
+/* =======================
+   STORE GRID
+======================= */
+.store {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+  padding: 40px;
+}
+
+/* =======================
+   GAME CARD
+======================= */
+.card {
+  object-fit: cover;
+  background: #0f172a;
+  border-radius: 14px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.card:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
+}
+
+/* Poster + Video */
+.card img,
+.card video {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.card video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.card h3 {
+  padding: 12px;
+  font-size: 16px;
+}
+
+.card p {
+  padding: 0 12px 15px;
+  color: #179f57;
+  font-weight: bold;
+}
+
+/* =======================
+   GAME DETAILS PAGE
+======================= */
+.game-page {
+  padding: 40px;
+}
+
+.game-layout {
+  display: flex;
+  gap: 40px;
+}
+
+.game-poster {
+  width: 320px;
+  border-radius: 15px;
+}
+
+.game-trailer {
+  width: 420px;
+  border-radius: 15px;
+}
+
+.game-info h1 {
+  font-size: 34px;
+  color: white;
+}
+
+.game-info h2 {
+  color: #0be58e;
+  margin: 10px 0;
+}
+
+.desc {
+  margin: 15px 0;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.details {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.details li {
+  margin: 8px 0;
+  color:aliceblue;
+}
+
+/* =======================
+   BUTTONS
+======================= */
+button {
+  margin-top: 20px;
+  padding: 12px 30px;
+  background: linear-gradient(90deg, #e75609, #d02e8f);
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:1px;
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card {
+  animation: fadeUp 0.7s ease forwards;
+  animation-delay: var(--delay);
+}
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(0,120,255,0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+.card:hover img {
+  transform: scale(1.08);
+}
+
+.card img {
+  transition: transform 0.6s ease;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 rgba(0,0,0,0); }
+  50% { box-shadow: 0 0 25px rgba(231,86,9,0.6); }
+  100% { box-shadow: 0 0 0 rgba(0,0,0,0); }
+}
+
+button:hover {
+  animation: pulse 1.2s infinite;
+}
+.game-layout {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: pageReveal 0.8s ease forwards;
+}
+
+@keyframes pageReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* =========================
+   GAME PAGE CONTAINER
+========================= */
+.game-page {
+  padding: 60px;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #0b1020, #020617);
+}
+
+/* =========================
+   GAME LAYOUT
+========================= */
+.game-layout {
+  display: flex;
+  gap: 50px;
+  align-items: flex-start;
+}
+
+/* =========================
+   POSTER
+========================= */
+.game-poster {
+  width: 320px;
+  border-radius: 18px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  transition: transform 0.5s ease;
+}
+
+.game-poster:hover {
+  transform: scale(1.05);
+}
+
+/* =========================
+   GAME INFO
+========================= */
+.game-info {
+  max-width: 700px;
+}
+
+.game-info h1 {
+  font-size: 42px;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.game-info h2 {
+  font-size: 26px;
+  color: #22c55e;
+  margin-bottom: 16px;
+}
+
+/* =========================
+   DESCRIPTION
+========================= */
+.desc {
+  font-size: 16px;
+  color: #cbd5e1;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+/* =========================
+   DETAILS LIST
+========================= */
+.details {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.details li {
+  padding: 10px 0;
+  border-bottom: 1px solid #1e293b;
+  font-size: 15px;
+  color: #e5e7eb;
+}
+
+.details li b {
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* =========================
+   BUY BUTTON
+========================= */
+button {
+  margin-top: 30px;
+  padding: 14px 40px;
+  background: linear-gradient(90deg, #0078f2, #0ea5e9);
+  border: none;
+  color: white;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(0, 120, 242, 0.5);
+}
+
+/* =========================
+   PAGE LOAD ANIMATION
+========================= */
+.game-layout {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: revealGame 0.8s ease forwards;
+}
+
+@keyframes revealGame {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+@media (max-width: 900px) {
+  .game-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game-poster {
+    width: 260px;
+  }
+
+  .game-info {
+    text-align: center;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+/* =========================
+   3D ANIMATED BACKGROUND
+========================= */
+.bg-3d {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, #0b1020, #020617);
+  overflow: hidden;
+  z-index: -1;
+  perspective: 1000px;
+}
+
+/* Floating layers */
+.bg-3d span {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(135deg, #0078f2, #8b5cf6);
+  opacity: 0.15;
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: float 20s infinite alternate ease-in-out;
+}
+
+/* Individual depth */
+.bg-3d span:nth-child(1) {
+  top: 10%;
+  left: 15%;
+  animation-duration: 18s;
+}
+.bg-3d span:nth-child(2) {
+  top: 60%;
+  left: 70%;
+  animation-duration: 22s;
+}
+.bg-3d span:nth-child(3) {
+  top: 30%;
+  left: 50%;
+  animation-duration: 26s;
+}
+.bg-3d span:nth-child(4) {
+  top: 80%;
+  left: 20%;
+  animation-duration: 30s;
+}
+
+/* Floating animation */
+@keyframes float {
+  0% {
+    transform: translateZ(-200px) translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateZ(200px) translateY(-100px) rotate(360deg);
+  }
+}
+/* =======================
+   SEARCH BAR
+======================= */
+.search-box {
+  position: relative;
+}
+
+.search-box input {
+  width: 200px;
+  padding: 8px 35px 8px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(56,189,248,0.4);
+  background: rgba(2,6,23,0.8);
+  color: white;
+  font-size: 13px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-box input::placeholder {
+  color: #94a3b8;
+}
+
+.search-box input:focus {
+  width: 240px;
+  border-color: #38bdf8;
+  box-shadow: 0 0 15px rgba(56,189,248,0.5);
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .search-box input {
+    width: 140px;
+  }
+
+  .search-box input:focus {
+    width: 180px;
+  }
+}

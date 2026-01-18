@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Epic Games | Login</title>
+  <link rel="stylesheet" href="style1.css">
+</head>
+
+<body class="login-body">
+
+<!-- POSTER BACKGROUND -->
+<div class="poster-bg" id="posterBg"></div>
+
+<!-- DARK OVERLAY -->
+<div class="video-overlay"></div>
+
+<!-- LOGIN UI -->
+<div class="login-box">
+  <h1 id="title">EPIC GAMES</h1>
+  <p id="subtitle">Sign in to continue</p>
+
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+
+  <button onclick="handleAuth()" id="actionBtn">LOGIN</button>
+
+  <span id="msg"></span>
+
+  <div class="switch">
+    <span id="switchText">New here?</span>
+    <a href="#" onclick="toggleMode()">Create account</a>
+  </div>
+</div>
+
+<script>
+/* ======================
+   POSTER BACKGROUND
+====================== */
+const posters = [
+  "assets/gta.jpg",
+  "assets/rdr2.jpg",
+  "assets/fortnite.jpg",
+  "assets/cyberpunk.jpg",
+  "assets/witcher3.jpg",
+  "assets/acvalhalla.jpg",
+  "assets/farcry6.jpg",
+  "assets/hitman3.jpg",
+  "assets/fifa23.jpg",
+  "assets/watchdogs.jpg"
+];
+
+let posterIndex = 0;
+const posterBg = document.getElementById("posterBg");
+
+function changePoster() {
+  posterBg.style.backgroundImage = `url('${posters[posterIndex]}')`;
+  posterIndex = (posterIndex + 1) % posters.length;
+}
+
+changePoster();
+setInterval(changePoster, 5000); // change every 5 sec
+
+/* ======================
+   LOGIN / REGISTER
+====================== */
+let isLogin = true;
+
+function toggleMode() {
+  isLogin = !isLogin;
+  actionBtn.innerText = isLogin ? "LOGIN" : "CREATE ACCOUNT";
+  subtitle.innerText = isLogin
+    ? "Sign in to continue"
+    : "Create your Epic Games account";
+  document.querySelector(".switch a").innerText =
+    isLogin ? "Create account" : "Back to login";
+  switchText.innerText =
+    isLogin ? "New here?" : "Already have an account?";
+  msg.innerText = "";
+}
+
+function handleAuth() {
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value;
+  const msg = document.getElementById("msg");
+
+  if (!username || !password) {
+    msg.innerText = "Please fill all fields";
+    msg.style.color = "red";
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem("epicUsers")) || {};
+
+  if (isLogin) {
+    if (!users[username] || users[username] !== password) {
+      msg.innerText = "Invalid username or password";
+      msg.style.color = "red";
+      return;
+    }
+  } else {
+    if (users[username]) {
+      msg.innerText = "Username already exists";
+      msg.style.color = "red";
+      return;
+    }
+    users[username] = password;
+    localStorage.setItem("epicUsers", JSON.stringify(users));
+  }
+
+  localStorage.setItem("epicUser", username);
+  msg.innerText = isLogin ? "Login successful!" : "Account created!";
+  msg.style.color = "#22c55e";
+
+  setTimeout(() => location.href = "index.html", 1000);
+}
+</script>
+
+</body>
+
+
+</html>

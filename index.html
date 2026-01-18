@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Epic Games Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<section class="game-grid" id="gameGrid"></section>
+
+<header class="nav">EPIC GAMES
+<navbar class="nav-links">
+
+  <div class="search-box">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search games"
+      onkeyup="searchGames()"
+    >
+    <span class="search-icon">🔍</span>
+  </div>
+
+  <a href="index.html" class="link">STORE</a>
+  <a href="about.html" class="link">ABOUT</a>
+  <a href="checkout.html" class="link checkout-link">
+    🛒 CHECKOUT <span id="cartCount">0</span>
+  </a>
+
+</navbar>
+</header>
+<section class="store" id="store"></section>
+
+<script src="data.js"></script>
+
+
+<script>
+if (!localStorage.getItem("epicUser")) {
+  location.href = "login.html";
+}
+
+const store = document.getElementById("store");
+
+games.forEach(g => {
+  store.innerHTML += `
+  <div class="card"
+       onmouseenter="playVideo(this)"
+       onmouseleave="stopVideo(this)"
+       onclick="openGame('${g.id}')">
+
+    <img src="${g.img}" class="poster">
+    <video src="${g.trailer}" muted loop class="preview"></video>
+
+    <h3>${g.name}</h3>
+    <p>${g.price === 0 ? "FREE" : "₹" + g.price}</p>
+  </div>
+`;
+
+});
+
+function openGame(id) {
+  location.href = `game.html?id=${id}`;
+}
+function playVideo(card) {
+  const video = card.querySelector("video");
+  video.style.opacity = 1;
+  video.play();
+}
+
+function stopVideo(card) {
+  const video = card.querySelector("video");
+  video.pause();
+  video.currentTime = 0;
+  video.style.opacity = 0;
+}
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("buyGame")) || null;
+  document.getElementById("cartCount").innerText = cart ? 1 : 0;
+}
+
+updateCartCount();
+
+
+</script>
+<script>
+function searchGames() {
+  const value = document.getElementById("searchInput").value.toLowerCase();
+  const cards = document.querySelectorAll(".card");
+
+  cards.forEach(card => {
+    const title = card.querySelector("h3").innerText.toLowerCase();
+    card.style.display = title.includes(value) ? "block" : "none";
+  });
+}
+</script>
+
+
+</body>
+</html>

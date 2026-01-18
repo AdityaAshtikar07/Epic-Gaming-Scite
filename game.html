@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg-3d">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<div class="game-page" id="game"></div>
+
+<script src="data.js"></script>
+<script>
+const id = new URLSearchParams(location.search).get("id");
+const g = games.find(x => x.id == id);
+
+if (!g) {
+  document.getElementById("game").innerHTML = "<h2>Game not found</h2>";
+  throw new Error("Invalid game ID");
+}
+
+
+document.getElementById("game").innerHTML = `
+  <div class="game-layout">
+    <img src="${g.img}" class="game-poster">
+
+
+
+    <div class="game-info">
+      <h1>${g.name}</h1>
+      <h2>${g.price === 0 ? "FREE" : "₹" + g.price}</h2>
+
+      <p class="desc">${g.description}</p>
+
+      <ul class="details">
+        <li><b>Genre:</b> ${g.genre}</li>
+        <li><b>Developer:</b> ${g.developer}</li>
+        <li><b>Release:</b> ${g.release}</li>
+        <li><b>Rating:</b> ⭐ ${g.rating}</li>
+      </ul>
+
+      <button onclick="buy()">BUY NOW</button>
+    </div>
+  </div>
+`;
+
+function buy() {
+  // Save selected game
+  localStorage.setItem("buyGame", JSON.stringify(g));
+
+  // Redirect directly to checkout
+  window.location.href = "checkout.html";
+}
+</script>
+<script>
+document.addEventListener("mousemove", e => {
+  const layers = document.querySelectorAll(".bg-3d span");
+  const x = (e.clientX / window.innerWidth - 0.5) * 40;
+  const y = (e.clientY / window.innerHeight - 0.5) * 40;
+
+  layers.forEach((layer, i) => {
+    layer.style.transform = `translate(${x * (i + 1)}px, ${y * (i + 1)}px)`;
+  });
+});
+</script>
+
+
+</body>
+</html>

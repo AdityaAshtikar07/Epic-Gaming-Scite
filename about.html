@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us | Epic Games</title>
+  <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+<header class="nav">
+  EPIC GAMES
+  <navbar>
+    <a href="index.html" class="link">STORE</a>
+    <a href="about.html" class="link active">ABOUT</a>
+  </navbar>
+</header>
+
+<section class="about-hero">
+  <h1 class="reveal">Welcome to Epic Games</h1>
+  <p class="reveal delay">
+    A next-generation digital store for legendary games.
+  </p>
+</section>
+
+<section class="about-section reveal">
+  <h2>🎮 Who We Are</h2>
+  <p>
+    Epic Games Store is a modern digital marketplace built for gamers.
+    We focus on performance, creativity, and immersive experiences.
+  </p>
+</section>
+
+<section class="about-section reveal">
+  <h2>🚀 Our Mission</h2>
+  <p>
+    To empower developers and deliver unforgettable gaming experiences
+    through cutting-edge technology and fair platforms.
+  </p>
+</section>
+
+<section class="about-cards">
+  <div class="about-card reveal">
+    <h3>🔥 High Quality Games</h3>
+    <p>Only the best AAA and indie titles curated for gamers.</p>
+  </div>
+
+  <div class="about-card reveal delay">
+    <h3>⚡ Performance Focused</h3>
+    <p>Fast, responsive, and visually stunning interface.</p>
+  </div>
+
+  <div class="about-card reveal delay2">
+    <h3>🌍 Global Community</h3>
+    <p>Millions of players connected worldwide.</p>
+  </div>
+</section>
+
+<footer class="about-footer reveal">
+  <p>&COPY;CREATED BY ADITYA ASHTIKAR</p>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+}, { threshold: 0.2 });
+
+reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

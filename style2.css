@@ -1,0 +1,129 @@
+/* =======================
+   ABOUT PAGE – 3D / NEON
+======================= */
+
+/* HERO */
+body{
+    background-color: #020617;
+}
+.about-hero {
+  text-align: center;
+  padding: 140px 20px;
+  background:
+    radial-gradient(circle at top, #8a0a7f, #020617 70%);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, rgba(56,189,248,0.15), transparent 60%);
+}
+
+.about-hero h1 {
+  font-size: 52px;
+  background: linear-gradient(90deg, #38bdf8, #9333ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 40px rgba(56,189,248,0.6);
+}
+
+.about-hero p {
+  font-size: 19px;
+  color: #e5e7eb;
+  margin-top: 20px;
+}
+
+/* SECTION */
+.about-section {
+  padding: 80px 90px;
+  max-width: 1000px;
+  margin: auto;
+  position: relative;
+}
+
+.about-section h2 {
+  font-size: 30px;
+  color: #38bdf8;
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(56,189,248,0.6);
+}
+
+.about-section p {
+  color: #f1f5f9;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+/* 3D CARDS */
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+  padding: 80px;
+  perspective: 1200px;
+}
+
+.about-card {
+  background:
+    linear-gradient(145deg, #020617, #0f172a);
+  padding: 35px;
+  border-radius: 20px;
+  text-align: center;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.8),
+    inset 0 0 0 1px rgba(56,189,248,0.2);
+}
+
+.about-card:hover {
+  transform: rotateX(8deg) rotateY(-8deg) translateY(-10px);
+  box-shadow:
+    0 30px 60px rgba(37,99,235,0.8),
+    0 0 40px rgba(147,51,234,0.6);
+}
+
+.about-card h3 {
+  margin-bottom: 15px;
+  font-size: 22px;
+  color: #38bdf8;
+}
+
+.about-card p {
+  color: #e5e7eb;
+}
+
+/* FOOTER */
+.about-footer {
+  text-align: center;
+  padding: 40px;
+  color: #cbd5f5;
+  border-top: 1px solid #1e293b;
+  background: linear-gradient(90deg, #020617, #0f172a);
+}
+
+/* =======================
+   SCROLL REVEAL (ENHANCED)
+======================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px) scale(0.95);
+  transition: 1s cubic-bezier(.19,1,.22,1);
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.delay {
+  transition-delay: 0.2s;
+}
+
+.delay2 {
+  transition-delay: 0.4s;
+}
